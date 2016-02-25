@@ -1,5 +1,7 @@
 package com.bassanidevelopment.santiago.grouprequest.model;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,14 +9,15 @@ import java.util.List;
  */
 public class Form {
     String title;
-    List<String> options;
-    List<Votes> votes;
-    List<User> activeUsers;
+    ArrayList<String> options;
+    ArrayList<Votes> votes;
+    ArrayList<String> activeUsers;
 
     public Form (){}
 
-    public Form (String title){
+    public Form (String title, ArrayList<String> activeUsers){
         this.title = title;
+        this.activeUsers = activeUsers;
 
     }
 
@@ -22,32 +25,45 @@ public class Form {
         this.title = title;
     }
 
-    public void setOptions(List<String> options) {
+    public void setOptions(ArrayList<String> options) {
         this.options = options;
     }
 
-    public void setVotes(List<Votes> votes) {
+    public void setVotes(ArrayList<Votes> votes) {
         this.votes = votes;
     }
 
-    public void setActiveUsers(List<User> activeUsers) {
+    public void setActiveUsers(ArrayList<String> activeUsers) {
         this.activeUsers = activeUsers;
     }
 
-    public String getTitle() {
+    public String getTitle() { return title; }
 
-        return title;
-    }
-
-    public List<String> getOptions() {
+    public ArrayList<String> getOptions() {
         return options;
     }
 
-    public List<Votes> getVotes() {
+    public ArrayList<Votes> getVotes() {
         return votes;
     }
 
-    public List<User> getActiveUsers() {
+    public ArrayList<String> getActiveUsers() {
         return activeUsers;
     }
+
+    public void  addOptions (String newOption){
+        options.add(newOption);
+    }
+
+
+
+    /*
+    * forms structure:
+    *
+    *   Forms:|
+    *         |-push()|-title:"title"
+      *       | create|-activeUsers:|-uid of user: UID
+       *      |   a   |-options:|- optionName : "option"
+        *     | UID   |-votes:|-userUID:voted option
+    * */
 }

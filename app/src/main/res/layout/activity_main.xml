@@ -27,14 +27,32 @@
         android:layout_alignParentStart="true"
         android:layout_toLeftOf="@+id/buttonSend"
         android:layout_toStartOf="@+id/buttonSend"
-        android:hint="Input name"/>
+        android:hint="Input Form Title"/>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/listView"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/buttonSend" />
+        android:layout_below="@+id/buttonAddOptions"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Options"
+        android:id="@+id/buttonAddOptions"
+        android:layout_below="@+id/editTextForm"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Users"
+        android:id="@+id/buttonAddUsers"
+        android:layout_below="@+id/editTextForm"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package com.bassanidevelopment.santiago.grouprequest.model;
 
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,22 +9,22 @@ import java.util.List;
  */
 public class User {
 
-    Long userID;
+    String userID;
     String name;
-    List<Form> activeForms;
-    List<Votes> userVotes;
+    ArrayList<String> activeForms;
+    ArrayList<String> userVotes;
 
     public User() {
     }
 
-    public User(Long userID, String name, List<Form> activeForms, List<Votes> userVotes) {
+    public User(String userID, String name, ArrayList<String> activeForms, ArrayList<String> userVotes) {
         this.userID = userID;
         this.name = name;
         this.activeForms = activeForms;
         this.userVotes = userVotes;
     }
 
-    public Long getUserID() {
+    public String getUserID() {
         return userID;
     }
 
@@ -30,11 +32,11 @@ public class User {
         return name;
     }
 
-    public List<Form> getActiveForms() {
+    public List<String> getActiveForms() {
         return activeForms;
     }
 
-    public List<Votes> getUserVotes() {
+    public List<String> getUserVotes() {
         return userVotes;
     }
 }

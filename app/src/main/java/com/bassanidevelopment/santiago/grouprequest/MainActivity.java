@@ -6,9 +6,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bassanidevelopment.santiago.grouprequest.model.Form;
@@ -20,15 +18,14 @@ import com.firebase.client.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity {
 
 
-    private String keys;
+    private String formKeys;
     private ArrayList<String> arrayList;
-    private Firebase myFirebaseRef;
+    private Firebase baseRef;
     private EditText formName;
     private Button buttonSend;
     private ArrayAdapter<String> adapter;
@@ -37,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Firebase.setAndroidContext(this);
-         myFirebaseRef = new Firebase("https://mula-board-1.firebaseio.com");
+         baseRef = new Firebase("https://mula-board-1.firebaseio.com");
 
-        final Firebase newRef = myFirebaseRef.child("Form");
+        final Firebase newRef = baseRef.child("Form");
         // text to send to firebase
-        formName = (EditText) findViewById(R.id.editTextForm);
-        Firebase ref = newRef.push();
-        ref.setValue("example");
+
+
+
 
         // list view
 
@@ -56,11 +53,12 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this,R.layout.list_view_item, R.id.textItem,arrayList );
         listView.setAdapter(adapter);
 
+        // end of list view
 
         newRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                arrayList.add(dataSnapshot.child("1").getValue().toString());
+
                 adapter.notifyDataSetChanged();
             }
 
@@ -74,15 +72,24 @@ public class MainActivity extends AppCompatActivity {
 
 
         // main layout button listener
+        formName = (EditText)findViewById(R.id.editTextForm);
         buttonSend = (Button) findViewById(R.id.buttonSend);
         buttonSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String name = formName.getText().toString();
-                newRef.push().setValue(name);
-                keys = newRef.getKey();
-                System.out.println(keys);
+                ArrayList<String> user = new ArrayList<String>();
+                user.add("santiago");
+                Form form = new Form(name, user);
+                baseRef.child("User").push().setValue(user);
+                String userKeys = baseRef.getKey();
+
+                newRef.push().setValue(form);
+                formKeys = newRef.getKey();
+                System.out.println(formKeys);
                 Toast.makeText(MainActivity.this, "new info", Toast.LENGTH_SHORT);
+
+                //
 
 
             }
